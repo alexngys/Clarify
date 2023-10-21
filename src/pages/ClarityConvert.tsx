@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { deployToStacks } from "../backend/src/api/utils/deployToStacks";
+import { Web3Provider } from "@ethersproject/providers";
 
 // TypeScript type assertion
 declare global {
@@ -19,7 +19,27 @@ function ClarityConvert() {
 
   // Handle Deploy function
   const handleDeploy = async () => {
-    
+    // Check if MetaMask is installed
+    if (window.ethereum) {
+      try {
+        const provider = new Web3Provider(window.ethereum);
+
+        // Request account access
+        const signer = provider.getSigner();
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        const account = accounts[0];
+        console.log("Connected to account:", account);
+
+        // Here you would add the logic to deploy the contract using ethers.js
+        // ...
+      } catch (error) {
+        console.error("User rejected access or there was an error:", error);
+      }
+    } else {
+      alert("Please install MetaMask!");
+    }
   };
 
   useEffect(() => {
