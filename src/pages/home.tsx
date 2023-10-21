@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const [clarityField, setClarityField] = useState("");
-  function ClaritySubmit() {}
 
   return (
     <div className="flex flex-col items-center justify-start h-screen text-center bg-gradient-to-r from-blue-200 to-blue-300">
