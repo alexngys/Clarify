@@ -19,8 +19,8 @@ app.post('/clarify', (req, res) => {
     }
     
     // TODO: Add logic to fetch smart contract source code, send to OpenAI, etc.
-    
-    res.send('Endpoint reached, contract address: ' + contractId);
+
+    res.send(`Endpoint reached.\nContract address: ${contractAddress}\nContract name: ${contractName}`);
 });
 
 const PORT = process.env.PORT || 3000;
