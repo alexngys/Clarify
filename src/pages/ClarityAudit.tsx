@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Textarea } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { usePDF } from "react-to-pdf";
 
 function ClarityAudit() {
   const [codeData, setCodeData] = useState("");
@@ -10,9 +11,20 @@ function ClarityAudit() {
 
   const handleAudit = async () => {
     setLoading(true);
+    console.log("Fetching data...");
+    try {
+      // Make POST request to backend
+      const response = await axios.post("http://localhost:3001/clarify", {
+        contractCode: codeData,
+      });
+      setAudit(response.data.gptResponse.choices[0].message.content);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
-  const downloadAudit = async () => {};
+  const { toPDF, targetRef } = usePDF({ filename: "ClarityAudit.pdf" });
 
   return (
     <div>
@@ -49,11 +61,13 @@ function ClarityAudit() {
                 <>
                   {audit ? (
                     <>
-                      <p className="break-words w-full whitespace-pre-wrap ">
-                        {audit}
-                      </p>
+                      <div ref={targetRef}>
+                        <p className="break-words w-full whitespace-pre-wrap ">
+                          {audit}
+                        </p>
+                      </div>
                       <Button
-                        onClick={downloadAudit}
+                        onClick={() => toPDF()}
                         className="deploy-button font-bold mt-3 px-6 py-2 bg-amber-500 text-white rounded "
                       >
                         Download PDF
