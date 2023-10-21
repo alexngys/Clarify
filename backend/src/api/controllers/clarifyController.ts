@@ -1,6 +1,6 @@
 import { getSourceCode } from '../utils/hiroAPIUtil';
 import { getGPTResponse } from '../utils/openaiUtil';
-import { generateClarifyPrompt, generateSolidityConvertPrompt } from '../utils/promptUtil';
+import { generateClarifyPrompt, generateSolidityConvertPrompt, extractSolidityCodeAndExplanation } from '../utils/promptUtil';
 
 export async function getContractAnalysis(req, res) {
     const contractId = req.body.contractId;
@@ -37,7 +37,12 @@ export async function convertToSolidity(req, res) {
         const sourceCodeData = await getSourceCode(contractAddress, contractName);
         const prompt = generateSolidityConvertPrompt(sourceCodeData.source);
         const gptResponse = await getGPTResponse(prompt);
-        res.send({sourceCodeData, gptResponse});
+
+        console.log(gptResponse.choices[0].message.content)
+
+        const { solidityCode, explanation } = extractSolidityCodeAndExplanation(gptResponse.choices[0].message.content)
+
+        res.send({sourceCodeData, solidityCode, explanation});
     } catch (error) {
         console.error('Error fetching smart contract source code:', error);
         res.status(500).send('Internal server error');
