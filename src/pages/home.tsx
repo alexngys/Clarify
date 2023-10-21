@@ -33,7 +33,7 @@ function Home() {
             {/* Submit button below the input box */}
             <Button
               className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
-              onClick={() => navigate(`/ClarityConvert/${clarityField}`)}
+              onClick={() => navigate(`/ClarityBreakdown/${clarityField}`)}
             >
               SUBMIT
             </Button>
@@ -41,7 +41,7 @@ function Home() {
         </Tabs.Item>
 
         {/* Solidity Tab */}
-        <Tabs.Item active title="Clarity to Solidity onverter">
+        <Tabs.Item active title="Clarity to Solidity Converter">
           <div className="flex flex-col justify-center items-center">
             <p className="font-bold mx-auto text-white">
               Enter your Clarity smart contract address and generate an
@@ -79,7 +79,7 @@ function Home() {
             {/* Submit button below the input box */}
             <Button
               className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
-              onClick={() => navigate(`/SolidtyConvert/${clarityField}`)}
+              onClick={() => navigate(`/ClarityConvert/${clarityField}`)}
             >
               SUBMIT
             </Button>
@@ -88,8 +88,8 @@ function Home() {
         <Tabs.Item active title="Clarity Contract auditing">
           <div className="flex flex-col justify-center items-center">
             <p className="font-bold mx-auto text-white">
-              Enter your Clarity smart contract address and generate an
-              equivalent code in Solidty
+              Audit your Clarity smart contract code to check for potential
+              security vulnerabilities, errors and general code quality.
             </p>
             {/* Input box beneath Clarity Tab */}
             <TextInput
