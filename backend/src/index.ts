@@ -8,16 +8,19 @@ app.use(bodyParser.json());
 
 // Define the /clarify endpoint
 app.post('/clarify', (req, res) => {
-    const contractAddress = req.body.contractAddress;
+    const contractId = req.body.contractId;
+
+    // Split the contract id into address and name
+    const [contractAddress, contractName] = contractId.split('.');
     
-    if (!contractAddress) {
+    if (!contractId) {
         res.status(400).send('Contract address is required');
         return;
     }
     
     // TODO: Add logic to fetch smart contract source code, send to OpenAI, etc.
     
-    res.send('Endpoint reached, contract address: ' + contractAddress);
+    res.send('Endpoint reached, contract address: ' + contractId);
 });
 
 const PORT = process.env.PORT || 3000;
