@@ -8,12 +8,12 @@ function ClarityConvert() {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-blue-200 to-blue-300 min-h-screen py-8">
+      <div className="bg-gradient-to-r from-teal-300 to-teal-500 min-h-screen py-8">
         <div className="container mx-auto">
-          <h1 className="text-2xl font-bold text-center mb-8">
+          <h1 className="text-4xl font-custom text-center mb-8 text-white">
             Clarity Smart Contract Address: {clarityAddress}
           </h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 ml-5 mr-5">
             <div className="bg-white p-4 rounded shadow-md">
               <h2 className="text-xl font-semibold mb-4">
                 Clarity Smart Contract Code
