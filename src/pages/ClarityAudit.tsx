@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Button, Textarea } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { usePDF } from "react-to-pdf";
+import generatePDF, { Resolution, Margin } from "react-to-pdf";
 
 function ClarityAudit() {
   const [codeData, setCodeData] = useState("");
-  const [audit, setAudit] = useState(null);
+  const [audit, setAudit] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleAudit = async () => {
@@ -21,14 +21,20 @@ function ClarityAudit() {
         }
       );
       setAudit(response.data.gptResponse.choices[0].message.content);
-      setLoading(false);
-      console.log(audit);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const { toPDF, targetRef } = usePDF({ filename: "ClarityAudit.pdf" });
+  const options = {
+    resolution: Resolution.HIGH,
+    page: {
+      // margin is in MM, default is Margin.NONE = 0
+      margin: Margin.SMALL,
+    },
+  };
+
+  const getTargetElement = () => document.getElementById("content-id");
 
   return (
     <div>
@@ -65,14 +71,14 @@ function ClarityAudit() {
                 <>
                   {audit ? (
                     <>
-                      <div ref={targetRef}>
+                      <div id="content-id">
                         <p className="break-words w-full whitespace-pre-wrap ">
                           {audit}
                         </p>
                       </div>
                       <div className="flex justify-end">
                         <Button
-                          onClick={() => toPDF()}
+                          onClick={() => generatePDF(getTargetElement, options)}
                           className="deploy-button font-bold mt-3 px-6 py-2 bg-amber-500 text-white rounded "
                         >
                           Download PDF
