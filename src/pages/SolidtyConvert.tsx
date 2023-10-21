@@ -15,6 +15,7 @@ declare global {
 function SolidtyConvert() {
   let { clarityAddress } = useParams();
   const [codeData, setCodeData] = useState(null);
+  const [solidityCode, setSolidityCode] = useState(null);
   const [explanation, setExplanation] = useState(null);
 
   // Handle Deploy function
@@ -53,7 +54,8 @@ function SolidtyConvert() {
         // { sourceCodeData: { source: '...' }, gptResponse: { choices: [{ text: '...' }] } }
         // Update state with data from backend
         setCodeData(response.data.sourceCodeData.source);
-        setExplanation(response.data.gptResponse.choices[0].message.content); 
+        setExplanation(response.data.solidity[0].message.content); 
+        setSolidityCode(response.data.solidity[1].message.content)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -85,7 +87,7 @@ function SolidtyConvert() {
               </h2>
               <pre>
                 <code className="language-solidity">
-                  {explanation || "Loading explanation..."}
+                  { solidityCode || "Loading explanation..."}
                 </code>
               </pre>
             </div>
