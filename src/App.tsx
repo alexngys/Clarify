@@ -3,7 +3,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import ClarityConvert from "./pages/ClarityConvert";
-import SolidtyConvert from "./pages/SolidtyConvert";
+import SolidityConvert from "./pages/SolidityConvert";
 import ClarityBreakdown from "./pages/ClarityBreakdown";
 import ClarityAudit from "./pages/ClarityAudit";
 
@@ -22,8 +22,8 @@ function App() {
           element={<ClarityConvert />}
         />
         <Route
-          path="/SolidtyConvert/:clarityAddress"
-          element={<SolidtyConvert />}
+          path="/SolidityConvert/:clarityAddress"
+          element={<SolidityConvert />}
         />
         <Route path="/ClarityAudit" element={<ClarityAudit />} />
       </Routes>
