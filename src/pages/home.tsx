@@ -63,6 +63,50 @@ function Home() {
             </Button>
           </div>
         </Tabs.Item>
+        <Tabs.Item active title="Solidity to Clarity Converter">
+          <div className="flex flex-col justify-center items-center">
+            <p className="font-bold mx-auto text-white">
+              Enter your Solidity smart contract address and generate an
+              equivalent code in Clarity
+            </p>
+            {/* Input box beneath Clarity Tab */}
+            <TextInput
+              placeholder="Enter your smart contract address here..."
+              className="mt-4 px-4 py-3  rounded placeholder-gray-500 text-lg w-[500px] h-12 resize-y"
+              value={clarityField}
+              onChange={(e) => setClarityField(e.target.value)}
+            ></TextInput>
+            {/* Submit button below the input box */}
+            <Button
+              className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
+              onClick={() => navigate(`/SolidtyConvert/${clarityField}`)}
+            >
+              SUBMIT
+            </Button>
+          </div>
+        </Tabs.Item>
+        <Tabs.Item active title="Clarity Contract auditing">
+          <div className="flex flex-col justify-center items-center">
+            <p className="font-bold mx-auto text-white">
+              Enter your Clarity smart contract address and generate an
+              equivalent code in Solidty
+            </p>
+            {/* Input box beneath Clarity Tab */}
+            <TextInput
+              placeholder="Enter your smart contract address here..."
+              className="mt-4 px-4 py-3  rounded placeholder-gray-500 text-lg w-[500px] h-12 resize-y"
+              value={clarityField}
+              onChange={(e) => setClarityField(e.target.value)}
+            ></TextInput>
+            {/* Submit button below the input box */}
+            <Button
+              className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
+              onClick={() => navigate(`/SolidtyConvert/${clarityField}`)}
+            >
+              SUBMIT
+            </Button>
+          </div>
+        </Tabs.Item>
       </Tabs.Group>
     </div>
   );
