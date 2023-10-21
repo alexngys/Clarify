@@ -19,7 +19,7 @@ function Home() {
         {/* Clarity Tab */}
         <Tabs.Item active title="Clarity">
           <div className="flex flex-col justify-center items-center">
-            <p className="mx-auto text-white">
+            <p className="font-bold mx-auto text-white">
               This is 
               <span className="font-default text-gray-800 text-white">
                 Clarity tab's associated content
@@ -37,20 +37,20 @@ function Home() {
             ></TextInput>
             {/* Submit button below the input box */}
             <Button
-              className="mt-4 px-6 py-2 bg-blue-500 text-white rounded"
+              className="font-bold mt-4 px-6 py-2 bg-blue-500 text-white rounded"
               onClick={() => navigate(`/ClarityConvert/${clarityField}`)}
             >
-              Submit
+              SUBMIT
             </Button>
           </div>
         </Tabs.Item>
 
         {/* Solidity Tab */}
         <Tabs.Item title="Solidity">
-          <div className="flex flex-col justify-center">
-            <p className="mx-auto">
+          <div className="flex flex-col justify-center items-center">
+            <p className="font-bold mx-auto text-white">
               This is
-              <span className="font-default text-gray-800 dark:text-white">
+              <span className="font-bold text-gray-800 text-white">
                 Solidity tab's associated content
               </span>
               . Clicking the other tab will toggle the visibility of this one.
@@ -60,11 +60,11 @@ function Home() {
             {/* Input box beneath Solidity Tab */}
             <TextInput
               placeholder="Enter your smart contract address here..."
-              className="mt-4 px-4 py-3  rounded placeholder-gray-500 text-lg w-3/4 h-12 resize-y"
+              className="mt-4 px-4 py-3  rounded placeholder-gray-500 text-lg w-2/4 h-12 resize-y"
             ></TextInput>
             {/* Submit button below the input box */}
-            <Button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded">
-              Submit
+            <Button className=" font-bold mt-4 px-6 py-2 bg-blue-500 text-white rounded">
+              SUBMIT
             </Button>
           </div>
         </Tabs.Item>
