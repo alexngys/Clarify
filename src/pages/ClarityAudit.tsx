@@ -14,11 +14,15 @@ function ClarityAudit() {
     console.log("Fetching data...");
     try {
       // Make POST request to backend
-      const response = await axios.post("http://localhost:3001/clarify", {
-        contractCode: codeData,
-      });
+      const response = await axios.post(
+        "http://localhost:3001/getAuditReport",
+        {
+          contractCode: codeData,
+        }
+      );
       setAudit(response.data.gptResponse.choices[0].message.content);
       setLoading(false);
+      console.log(audit);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -66,17 +70,21 @@ function ClarityAudit() {
                           {audit}
                         </p>
                       </div>
-                      <Button
-                        onClick={() => toPDF()}
-                        className="deploy-button font-bold mt-3 px-6 py-2 bg-amber-500 text-white rounded "
-                      >
-                        Download PDF
-                      </Button>
+                      <div className="flex justify-end">
+                        <Button
+                          onClick={() => toPDF()}
+                          className="deploy-button font-bold mt-3 px-6 py-2 bg-amber-500 text-white rounded "
+                        >
+                          Download PDF
+                        </Button>
+                      </div>
                     </>
                   ) : (
-                    <div className="flex justify-center pt-10">
-                      Audit loading...
-                    </div>
+                    <>
+                      <div className="flex justify-center mt-20">
+                        Audit loading...
+                      </div>
+                    </>
                   )}
                 </>
               ) : (

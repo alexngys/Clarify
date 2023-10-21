@@ -77,7 +77,8 @@ export async function getAuditReport(req, res) {
   try {
     const prompt = generateAuditPrompt(contractCode);
     const gptResponse = await getGPTResponse(prompt);
-    res.send(gptResponse);
+    console.log(gptResponse.choices[0].message.content);
+    res.send({ gptResponse });
   } catch (error) {
     console.error("Error fetching smart contract source code:", error);
     res.status(500).send("Internal server error");
