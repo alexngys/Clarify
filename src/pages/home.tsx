@@ -7,7 +7,7 @@ function Home() {
   const [clarityField, setClarityField] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-start h-screen text-center bg-gradient-to-r from-teal-200 to-teal-500">
+    <div className="flex flex-col items-center justify-start h-screen text-center bg-gradient-to-r from-teal-300 to-teal-500">
       {/* Even Larger Bold Centered Title */}
       <h1 className="text-8xl font-custom mb-8 mt-8 text-white">CLARIFY</h1>
 
