@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "flowbite-react";
 import { useParams } from "react-router-dom";
+import axios from 'axios';
 
 function ClarityConvert() {
   let { clarityAddress } = useParams();
-  const apikey = process.env.REACT_APP_OPENAI_API_KEY;
+  const [codeData, setCodeData] = useState(null);
+  const [explanation, setExplanation] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('Fetching data...');
+      try {
+        // Make POST request to backend
+        const response = await axios.post('http://localhost:3001/clarify', {
+          contractId: clarityAddress
+        });
+        // Assume the response data structure is as follows:
+        // { sourceCodeData: { source: '...' }, gptResponse: { choices: [{ text: '...' }] } }
+        // Update state with data from backend
+        setCodeData(response.data.sourceCodeData.source);
+        setExplanation(response.data.gptResponse.choices[0].message.content); 
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [clarityAddress]); 
+
+  console.log('clarityAddress:', clarityAddress);
+  
   return (
     <div>
       <div className="bg-gradient-to-r from-teal-300 to-teal-500 min-h-screen py-8">
@@ -20,9 +44,7 @@ function ClarityConvert() {
               </h2>
               <pre>
                 <code className="language-javascript">
-                  {`function greet() {
-  console.log("Hello, World!");
-}`}
+                  {codeData || 'Loading code...'}
                 </code>
               </pre>
             </div>
@@ -30,9 +52,7 @@ function ClarityConvert() {
               <h2 className="text-xl font-semibold mb-4">Explanation</h2>
               <pre>
                 <code className="language-javascript">
-                  {`function add(a, b) {
-  return a + b;
-}`}
+                  {explanation || 'Loading explanation...'}
                 </code>
               </pre>
             </div>
