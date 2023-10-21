@@ -37,7 +37,7 @@ export async function convertToSolidity(req, res) {
         const sourceCodeData = await getSourceCode(contractAddress, contractName);
         const prompt = generateSolidityConvertPrompt(sourceCodeData.source);
         const gptResponse = await getGPTResponse(prompt);
-        res.send(gptResponse);
+        res.send({sourceCodeData, gptResponse});
     } catch (error) {
         console.error('Error fetching smart contract source code:', error);
         res.status(500).send('Internal server error');
