@@ -57,7 +57,7 @@ function Home() {
             {/* Submit button below the input box */}
             <Button
               className="font-bold mt-4 px-6 py-2 bg-blue-500 text-white rounded"
-              onClick={() => navigate(`/ClarityConvert/${clarityField}`)}
+              onClick={() => navigate(`/SolidtyConvert/${clarityField}`)}
             >
               SUBMIT
             </Button>
