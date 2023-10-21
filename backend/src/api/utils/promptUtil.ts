@@ -14,6 +14,7 @@ export function generateClarifyPrompt(sourceCode: string) {
         - Identify any notable security considerations or potential optimizations.
         - Offer insight on how data is managed and stored within the contract.
         - Any additional relevant information regarding contract interaction, state management, or design patterns employed.
+        - Add newline characters (\\n) to separate each section of your response.
     `;
     return prompt;
 }
