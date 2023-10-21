@@ -5,6 +5,8 @@
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
     "@metamask/detect-provider": "^2.0.0",
+    "@stacks/network": "^6.8.1",
+    "@stacks/transactions": "^6.9.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -17,6 +19,7 @@
     "ethers": "^6.8.0",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",
+    "fs": "^0.0.1-security",
     "openai": "^4.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

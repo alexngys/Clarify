@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "flowbite-react";
+import { Button, Toast } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Web3Provider } from "@ethersproject/providers";
+import { deployToStacks } from "../utils/deployToStacks";
 
 // TypeScript type assertion
 declare global {
@@ -11,34 +11,20 @@ declare global {
   }
 }
 
-function SolidtyConvert() {
+function SolidityConvert() {
   let { clarityAddress } = useParams();
   const [codeData, setCodeData] = useState(null);
-  const [solidityCode, setSolidityCode] = useState(null);
+  const [clarityCode, setClarityCode] = useState(null);
   const [explanation, setExplanation] = useState(null);
+  const [broadcastSuccess, setBroadcastSuccess] = useState<string | null>(null);
 
   // Handle Deploy function
   const handleDeploy = async () => {
-    // Check if MetaMask is installed
-    if (window.ethereum) {
-      try {
-        const provider = new Web3Provider(window.ethereum);
-
-        // Request account access
-        const signer = provider.getSigner();
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        const account = accounts[0];
-        console.log("Connected to account:", account);
-
-        // Here you would add the logic to deploy the contract using ethers.js
-        // ...
-      } catch (error) {
-        console.error("User rejected access or there was an error:", error);
-      }
+    if (clarityCode) {
+      const res = await deployToStacks(clarityCode);
+      setBroadcastSuccess(res);
     } else {
-      alert("Please install MetaMask!");
+      console.error("clarityCode is null");
     }
   };
 
@@ -48,16 +34,16 @@ function SolidtyConvert() {
       try {
         // Make POST request to backend
         const response = await axios.post(
-          "http://localhost:3001/convertToSolidity",
+          "http://localhost:3001/convertToClarity",
           {
-            contractId: clarityAddress,
+            contractAddress: clarityAddress,
           }
         );
         // Assume the response data structure is as follows:
         // { sourceCodeData: { source: '...' }, gptResponse: { choices: [{ text: '...' }] } }
         // Update state with data from backend
-        setCodeData(response.data.sourceCodeData.source);
-        setSolidityCode(response.data.solidityCode);
+        setCodeData(response.data.sourceCodeData);
+        setClarityCode(response.data.clarityCode);
         setExplanation(response.data.explanation);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -76,7 +62,7 @@ function SolidtyConvert() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 ml-5 mr-5">
             <div className="bg-white p-4 rounded shadow-md">
               <h2 className="text-xl font-semibold mb-4">
-                Clarity Smart Contract Code
+                Solidity Smart Contract Code
               </h2>
               <pre className="overflow-auto">
                 {codeData || "Loading code..."}
@@ -84,10 +70,10 @@ function SolidtyConvert() {
             </div>
             <div className="bg-white p-4 rounded shadow-md">
               <h2 className="text-xl font-semibold mb-4">
-                Solidity Smart Contract Code
+                Clarity Smart Contract Code
               </h2>
               <pre className="overflow-auto">
-                {solidityCode || "Loading code..."}
+                {clarityCode || "Loading code..."}
               </pre>
             </div>
           </div>
@@ -96,12 +82,26 @@ function SolidtyConvert() {
           <div className="bg-white p-4 rounded shadow-md ">
             <div className="flex justify-between">
               <h2 className="text-2xl font-semibold mb-4 ">Explanation</h2>
-              <Button
-                onClick={handleDeploy}
-                className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
-              >
-                DEPLOY
-              </Button>
+              {broadcastSuccess ? (
+                <Toast className="h-20">
+                  <div className="ml-3 text-sm font-semibold break-all">
+                    Broadcast Transaction ID: {broadcastSuccess}
+                  </div>
+                  <Toast.Toggle />
+                </Toast>
+              ) : (
+                <></>
+              )}
+              {clarityCode ? (
+                <Button
+                  onClick={handleDeploy}
+                  className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
+                >
+                  DEPLOY
+                </Button>
+              ) : (
+                <></>
+              )}
             </div>
             <p className="break-words whitespace-pre-wrap ">
               {explanation || "Loading explanation..."}
@@ -113,4 +113,4 @@ function SolidtyConvert() {
   );
 }
 
-export default SolidtyConvert;
+export default SolidityConvert;
