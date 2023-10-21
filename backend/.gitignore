@@ -1,0 +1,21 @@
+# Node.js related
+node_modules/
+npm-debug.log
+
+# TypeScript cache and output
+*.tsbuildinfo
+dist/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+.env.enc
