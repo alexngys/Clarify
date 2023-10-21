@@ -16,6 +16,7 @@ function ClarityConvert() {
   const [codeData, setCodeData] = useState(null);
   const [solidityCode, setSolidityCode] = useState(null);
   const [explanation, setExplanation] = useState(null);
+  const [broadcastSuccess, setBroadcastSuccess] = useState(false);
 
   // Handle Deploy function
   const handleDeploy = async () => {

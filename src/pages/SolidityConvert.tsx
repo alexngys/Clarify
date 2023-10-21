@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "flowbite-react";
+import { Button, Toast } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { deployToStacks } from "../utils/deployToStacks";
@@ -16,11 +16,13 @@ function SolidityConvert() {
   const [codeData, setCodeData] = useState(null);
   const [clarityCode, setClarityCode] = useState(null);
   const [explanation, setExplanation] = useState(null);
+  const [broadcastSuccess, setBroadcastSuccess] = useState<string | null>(null);
 
   // Handle Deploy function
   const handleDeploy = async () => {
     if (clarityCode) {
-      deployToStacks(clarityCode);
+      const res = await deployToStacks(clarityCode);
+      setBroadcastSuccess(res);
     } else {
       console.error("clarityCode is null");
     }
@@ -80,6 +82,16 @@ function SolidityConvert() {
           <div className="bg-white p-4 rounded shadow-md ">
             <div className="flex justify-between">
               <h2 className="text-2xl font-semibold mb-4 ">Explanation</h2>
+              {broadcastSuccess ? (
+                <Toast className="h-20">
+                  <div className="ml-3 text-sm font-normal break-all">
+                    Broadcast Transaction ID: {broadcastSuccess}
+                  </div>
+                  <Toast.Toggle />
+                </Toast>
+              ) : (
+                <></>
+              )}
               <Button
                 onClick={handleDeploy}
                 className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
