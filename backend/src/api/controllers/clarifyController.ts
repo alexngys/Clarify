@@ -4,7 +4,8 @@ import { generateClarifyPrompt,
     generateSolidityConvertPrompt, 
     generateClarityConvertPrompt, 
     extractSolidityCodeAndExplanation,
-    extractClarityCodeAndExplanation
+    extractClarityCodeAndExplanation,
+    generateAuditPrompt
  } from '../utils/promptUtil';
 import { deployToStacks } from '../utils/deployToStacks';
 import { getSoliditySourceCode } from '../utils/etherscanAPIUtil';
@@ -76,8 +77,6 @@ export async function convertToClarity(req, res) {
         console.log(clarityCode)
         console.log(explanation)
 
-        deployToStacks(clarityCode);
-
         res.send({sourceCodeData, clarityCode, explanation});
     } catch (error) {
         console.error('Error fetching smart contract source code:', error);
@@ -85,9 +84,23 @@ export async function convertToClarity(req, res) {
     }
 };
 
-// export async function deployClarityContract(req, res) {
-//     console.log("Deploying contract...")
-
-//     deployContract();
-//     console.log("Deployed contract")
-// };
+export async function getAuditReport(req, res) {
+    const contractCode = req.body.contractCode;
+  
+    console.log("Endpoint hit");
+  
+    if (!contractCode) {
+      res.status(400).send("Invalid");
+      return;
+    }
+  
+    try {
+      const prompt = generateAuditPrompt(contractCode);
+      const gptResponse = await getGPTResponse(prompt);
+      console.log(gptResponse.choices[0].message.content);
+      res.send({ gptResponse });
+    } catch (error) {
+      console.error("Error fetching smart contract source code:", error);
+      res.status(500).send("Internal server error");
+    }
+  }

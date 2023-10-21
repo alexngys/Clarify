@@ -100,3 +100,23 @@ export function extractClarityCodeAndExplanation(response: string): { clarityCod
     
     return { clarityCode, explanation };
 }
+
+export function generateAuditPrompt(sourceCode: string) {
+    const prompt = `
+          Analyze the following Stacks Clarity smart contract code for vulnerabilities, security risks, efficiency, and adherence to best practices. Provide a professional, in-depth audit report detailing any issues found, along with recommendations for mitigating these issues. Include an executive summary, detailed findings, and conclusion. 
+  
+          Contract Source Code:
+          \`\`\`
+          ${sourceCode}
+          \`\`\`
+
+          Instructions:
+          1. Identify and translate data types from Solidity to their Clarity counterparts.
+          2. Convert Solidity functions to Clarity functions, ensuring that visibility and mutability are appropriately set.
+          3. Translate any contract storage variables and structures, preserving their relationships and accessibility.
+          4. Ensure that any contract-level logic is preserved and functional in the Clarity version.
+          5. Comment on any significant differences or considerations that arise from translating between these two smart contract languages.
+          6. Provide a brief explanation for each function's purpose and any modifications made during translation.
+      `;
+      return prompt;
+  }
