@@ -38,14 +38,14 @@ function ClarityAudit() {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-teal-300 to-teal-500 min-h-screen py-8">
+      <div className="bg-teal-100 min-h-screen py-8">
         <div className="container mx-auto">
-          <h1 className="text-4xl font-custom text-center mb-8 text-white">
+          <h1 className="text-4xl font-custom text-center mb-8 text-teal-500">
             Clarity Audit
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 ml-5 mr-5">
             <div className="bg-white p-4 rounded shadow-md ">
-              <h2 className="text-xl font-semibold mb-4">
+              <h2 className="text-xl font-semibold mb-4 text-teal-500">
                 Clarity Smart Contract Code
               </h2>
               <Textarea
@@ -59,14 +59,14 @@ function ClarityAudit() {
               <div className="flex justify-end">
                 <Button
                   onClick={handleAudit}
-                  className="deploy-button font-bold mt-3 px-6 py-2 bg-amber-500 text-white rounded "
+                  className="deploy-button font-bold mt-3 px-3 py-1 bg-amber-500 text-white rounded "
                 >
                   Submit
                 </Button>
               </div>
             </div>
             <div className="bg-white p-4 rounded shadow-md">
-              <h2 className="text-xl font-semibold mb-4 w-full">Audit</h2>
+              <h2 className="text-xl font-semibold mb-4 w-full text-teal-500">Audit</h2>
               {loading ? (
                 <>
                   {audit ? (

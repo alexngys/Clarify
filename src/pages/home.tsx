@@ -52,7 +52,7 @@ function Home() {
           <div className="flex flex-col justify-center items-center">
             <p className="font-bold mx-auto">
               Enter your Clarity smart contract address and generate an
-              equivalent code in Solidty
+              equivalent code in Solidity
             </p>
             {/* Input box beneath Clarity Tab */}
             <TextInput
