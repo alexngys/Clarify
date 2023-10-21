@@ -57,7 +57,7 @@ function SolidityConvert() {
       <div className="bg-gradient-to-r from-teal-300 to-teal-500 min-h-screen py-8">
         <div className="container mx-auto">
           <h1 className="text-4xl font-custom text-center mb-8 text-white">
-            Clarity Smart Contract Address: {clarityAddress}
+            Solidity Smart Contract Address: {clarityAddress}
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 ml-5 mr-5">
             <div className="bg-white p-4 rounded shadow-md">
@@ -83,7 +83,7 @@ function SolidityConvert() {
             <div className="flex justify-between">
               <h2 className="text-2xl font-semibold mb-4 ">Explanation</h2>
               {broadcastSuccess ? (
-                <Toast className="h-20">
+                <Toast className="h-16">
                   <div className="ml-3 text-sm font-semibold break-all">
                     Broadcast Transaction ID: {broadcastSuccess}
                   </div>
@@ -95,9 +95,9 @@ function SolidityConvert() {
               {clarityCode ? (
                 <Button
                   onClick={handleDeploy}
-                  className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
+                  className="deploy-button font-bold mt-2 px-6  bg-amber-500 text-white rounded h-[64px]"
                 >
-                  DEPLOY
+                  Deploy Clarity Contract
                 </Button>
               ) : (
                 <></>
