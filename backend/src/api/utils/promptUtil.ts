@@ -42,6 +42,29 @@ export function generateSolidityConvertPrompt(sourceCode: string) {
     return prompt;
 }
 
+export function generateClarityConvertPrompt(sourceCode: string) {
+    const prompt = `
+        Title: Solidity to Clarity Code Conversion
+
+        Description: 
+        Convert the provided Solidity smart contract code to its equivalent in Clarity, ensuring that the functionality remains consistent across both versions. Translate the logic, functions, and data structures from Solidity to Clarity while preserving the original intent and behavior of the contract.
+        
+        Solidity Code:
+        \`\`\`
+        ${sourceCode}
+        \`\`\`
+
+        Instructions:
+        1. Identify and translate data types from Solidity to their Clarity counterparts.
+        2. Convert Solidity functions to Clarity functions, ensuring that visibility and mutability are appropriately set.
+        3. Translate any contract storage variables and structures, preserving their relationships and accessibility.
+        4. Ensure that any contract-level logic is preserved and functional in the Clarity version.
+        5. Comment on any significant differences or considerations that arise from translating between these two smart contract languages.
+        6. Provide a brief explanation for each function's purpose and any modifications made during translation.
+    `;
+    return prompt;
+}
+
 export function extractSolidityCodeAndExplanation(response: string): { solidityCode: string, explanation: string } {
     // Find the indices of the Solidity code block
     const codeBlockStart = response.indexOf("```solidity");
@@ -58,4 +81,22 @@ export function extractSolidityCodeAndExplanation(response: string): { solidityC
     const explanation = response.substring(codeBlockEnd + "```".length).trim();
     
     return { solidityCode, explanation };
+}
+
+export function extractClarityCodeAndExplanation(response: string): { clarityCode: string, explanation: string } {
+    // Find the indices of the Clarity code block
+    const codeBlockStart = response.indexOf("```");
+    const codeBlockEnd = response.indexOf("```", codeBlockStart + "```".length - 1);
+    
+    if (codeBlockStart === -1 || codeBlockEnd === -1) {
+        throw new Error('Clarity code block not found');
+    }
+
+    // Extract the Clarity code
+    const clarityCode = response.substring(codeBlockStart + "```".length, codeBlockEnd).trim();
+
+    // Get everything after the Clarity code block
+    const explanation = response.substring(codeBlockEnd + "```".length).trim();
+    
+    return { clarityCode, explanation };
 }
