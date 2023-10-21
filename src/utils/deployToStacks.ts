@@ -8,8 +8,6 @@ import {
     privateKeyToString,
 } from '@stacks/transactions';
 
-import { readFileSync } from 'fs';
-
 import { StacksTestnet } from '@stacks/network';
 
 const network = new StacksTestnet();
@@ -23,7 +21,7 @@ export async function deployToStacks(clarityCode: string) {
 
     const deployTx = await makeContractDeploy({
         contractName,
-        codeBody: readFileSync('./hello-world.clar').toString(),
+        codeBody: clarityCode,
         senderKey: '5ce02957bf820067e43ae0503b5547e90474242ba610c301ca8122baf593064b',
         network,
         anchorMode: AnchorMode.Any

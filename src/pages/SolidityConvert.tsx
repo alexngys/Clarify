@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-function SolidtyConvert() {
+function SolidityConvert() {
   let { clarityAddress } = useParams();
   const [codeData, setCodeData] = useState(null);
   const [clarityCode, setClarityCode] = useState(null);
@@ -97,4 +97,4 @@ function SolidtyConvert() {
   );
 }
 
-export default SolidtyConvert;
+export default SolidityConvert;
