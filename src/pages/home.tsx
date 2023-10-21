@@ -7,9 +7,9 @@ function Home() {
   const [clarityField, setClarityField] = useState("");
 
   return (
-    <div className="flex flex-col items-center justify-start h-screen text-center bg-gradient-to-r from-blue-200 to-blue-300">
+    <div className="flex flex-col items-center justify-start h-screen text-center bg-gradient-to-r from-teal-200 to-teal-500">
       {/* Even Larger Bold Centered Title */}
-      <h1 className="text-8xl font-bold mb-8 mt-8 text-white">CLARIFY</h1>
+      <h1 className="text-8xl font-custom mb-8 mt-8 text-white">CLARIFY</h1>
 
       <Tabs.Group
         aria-label="Clarify tabs"
@@ -18,10 +18,10 @@ function Home() {
       >
         {/* Clarity Tab */}
         <Tabs.Item active title="Clarity">
-          <div className="flex flex-col justify-center">
-            <p className="mx-auto">
-              This is
-              <span className="font-medium text-gray-800 dark:text-white">
+          <div className="flex flex-col justify-center items-center">
+            <p className="mx-auto text-white">
+              This is 
+              <span className="font-default text-gray-800 text-white">
                 Clarity tab's associated content
               </span>
               . Clicking the other tab will toggle the visibility of this one.
@@ -30,7 +30,7 @@ function Home() {
             </p>
             {/* Input box beneath Clarity Tab */}
             <TextInput
-              placeholder="Enter your address here..."
+              placeholder="Enter your smart contract address here..."
               className="mt-4 px-4 py-3  rounded placeholder-gray-500 text-lg w-2/4 h-12 resize-y"
               value={clarityField}
               onChange={(e) => setClarityField(e.target.value)}
@@ -50,7 +50,7 @@ function Home() {
           <div className="flex flex-col justify-center">
             <p className="mx-auto">
               This is
-              <span className="font-medium text-gray-800 dark:text-white">
+              <span className="font-default text-gray-800 dark:text-white">
                 Solidity tab's associated content
               </span>
               . Clicking the other tab will toggle the visibility of this one.
@@ -59,7 +59,7 @@ function Home() {
             </p>
             {/* Input box beneath Solidity Tab */}
             <TextInput
-              placeholder="Enter your address here..."
+              placeholder="Enter your smart contract address here..."
               className="mt-4 px-4 py-3  rounded placeholder-gray-500 text-lg w-3/4 h-12 resize-y"
             ></TextInput>
             {/* Submit button below the input box */}
