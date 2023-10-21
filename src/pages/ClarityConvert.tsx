@@ -16,9 +16,6 @@ function ClarityConvert() {
         const response = await axios.post("http://localhost:3001/clarify", {
           contractId: clarityAddress,
         });
-        // Assume the response data structure is as follows:
-        // { sourceCodeData: { source: '...' }, gptResponse: { choices: [{ text: '...' }] } }
-        // Update state with data from backend
         setCodeData(response.data.sourceCodeData.source);
         setExplanation(response.data.gptResponse.choices[0].message.content);
       } catch (error) {
@@ -49,7 +46,7 @@ function ClarityConvert() {
             <div className="bg-white p-4 rounded shadow-md">
               <h2 className="text-xl font-semibold mb-4 w-full">Explanation</h2>
 
-              <p className="break-normal w-full">
+              <p className="break-words w-full whitespace-pre-wrap ">
                 {explanation || "Loading explanation..."}
               </p>
             </div>
