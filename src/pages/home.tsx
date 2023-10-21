@@ -10,7 +10,9 @@ function Home() {
     <div className="flex flex-col items-center justify-start h-screen text-center bg-teal-100">
       
       {/* Title */}
-      <h1 className="text-8xl font-custom mb-8 mt-8 text-teal-500">CLARIFY</h1>
+      <h1 className="text-8xl font-custom mb-0 mt-8 text-teal-500">CLARIFY</h1>
+
+      <h2 className="text-xl font-light mb-8 text-teal-400">Clarity in every contract</h2>
 
       {/* Tabs */}
       <Tabs.Group aria-label="Clarify tabs" style="underline" className="justify-center border-t border-b border-teal-300">
@@ -32,7 +34,7 @@ function Home() {
             
             {/* Submit button */}
             <Button
-              className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
+              className="font-bold mt-4 px-3 py-1 bg-amber-500 text-white rounded-lg"
               onClick={() => navigate(`/ClarityBreakdown/${clarityField}`)}
             >
               SUBMIT
@@ -56,7 +58,7 @@ function Home() {
             ></TextInput>
             {/* Submit button below the input box */}
             <Button
-              className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
+              className="font-bold mt-4 px-3 py-1 bg-amber-500 text-white rounded-lg"
               onClick={() => navigate(`/SolidtyConvert/${clarityField}`)}
             >
               SUBMIT
@@ -78,7 +80,7 @@ function Home() {
             ></TextInput>
             {/* Submit button below the input box */}
             <Button
-              className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
+              className="font-bold mt-4 px-3 py-1 bg-amber-500 text-white rounded-lg"
               onClick={() => navigate(`/ClarityConvert/${clarityField}`)}
             >
               SUBMIT
@@ -88,12 +90,11 @@ function Home() {
         <Tabs.Item active title="Clarity Contract auditing">
           <div className="flex flex-col justify-center items-center">
             <p className="font-bold mx-auto">
-              Audit your Clarity smart contract code to check for potential
-              security vulnerabilities, errors and general code quality.
+            Audit your Clarity contract for security risks, errors, and quality.
             </p>
             {/* Input box beneath Clarity Tab */}
             <Button
-              className="font-bold mt-4 px-6 py-2 bg-amber-500 text-white rounded"
+              className="font-bold mt-4 px-3 py-1 bg-amber-500 text-white rounded-lg"
               onClick={() => navigate(`/ClarityAudit`)}
             >
               GO TO AUDIT
