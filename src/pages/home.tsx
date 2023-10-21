@@ -41,9 +41,9 @@ function Home() {
         </Tabs.Item>
 
         {/* Solidity Tab */}
-        <Tabs.Item active title="Solidty">
+        <Tabs.Item active title="Solidity">
           <div className="flex flex-col justify-center items-center">
-            <p className="mx-auto text-white">
+            <p className="font-bold mx-auto text-white">
               Enter your Clarity smart contract address and generate an
               equivalent code in Solidty
             </p>
@@ -56,10 +56,10 @@ function Home() {
             ></TextInput>
             {/* Submit button below the input box */}
             <Button
-              className="mt-4 px-6 py-2 bg-blue-500 text-white rounded"
+              className="font-bold mt-4 px-6 py-2 bg-blue-500 text-white rounded"
               onClick={() => navigate(`/ClarityConvert/${clarityField}`)}
             >
-              Submit
+              SUBMIT
             </Button>
           </div>
         </Tabs.Item>
