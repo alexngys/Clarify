@@ -84,7 +84,7 @@ function SolidityConvert() {
               <h2 className="text-2xl font-semibold mb-4 ">Explanation</h2>
               {broadcastSuccess ? (
                 <Toast className="h-20">
-                  <div className="ml-3 text-sm font-normal break-all">
+                  <div className="ml-3 text-sm font-semibold break-all">
                     Broadcast Transaction ID: {broadcastSuccess}
                   </div>
                   <Toast.Toggle />
@@ -92,12 +92,16 @@ function SolidityConvert() {
               ) : (
                 <></>
               )}
-              <Button
-                onClick={handleDeploy}
-                className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
-              >
-                DEPLOY
-              </Button>
+              {clarityCode ? (
+                <Button
+                  onClick={handleDeploy}
+                  className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
+                >
+                  DEPLOY
+                </Button>
+              ) : (
+                <></>
+              )}
             </div>
             <p className="break-words whitespace-pre-wrap ">
               {explanation || "Loading explanation..."}
