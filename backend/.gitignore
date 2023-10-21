@@ -18,4 +18,5 @@ dist/
 .DS_Store
 Thumbs.db
 
-.env.enc
+.env.local
+.env
