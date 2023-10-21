@@ -17,7 +17,7 @@ function Home() {
         className="justify-center border-w"
       >
         {/* Clarity Tab */}
-        <Tabs.Item active title="Clarity">
+        <Tabs.Item active title="Clarity Breakdown">
           <div className="flex flex-col justify-center items-center">
             <p className="font-bold mx-auto text-white">
               Enter your Clarity smart contract address and generate an
@@ -41,7 +41,7 @@ function Home() {
         </Tabs.Item>
 
         {/* Solidity Tab */}
-        <Tabs.Item active title="Solidity">
+        <Tabs.Item active title="Clarity to Solidity onverter">
           <div className="flex flex-col justify-center items-center">
             <p className="font-bold mx-auto text-white">
               Enter your Clarity smart contract address and generate an
