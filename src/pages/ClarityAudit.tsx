@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "flowbite-react";
+import { Button, Textarea } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function ClarityAudit() {
-  const [codeData, setCodeData] = useState(null);
-  const [explanation, setExplanation] = useState(null);
+  const [codeData, setCodeData] = useState("");
+  const [audit, setAudit] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleAudit = async () => {
+    setLoading(true);
+  };
+
+  const downloadAudit = async () => {};
 
   return (
     <div>
@@ -19,16 +26,48 @@ function ClarityAudit() {
               <h2 className="text-xl font-semibold mb-4">
                 Clarity Smart Contract Code
               </h2>
-              <pre className="overflow-auto">
-                {codeData || "Loading code..."}
-              </pre>
+              <Textarea
+                id="code"
+                placeholder="Write your code here..."
+                required
+                rows={20}
+                value={codeData}
+                onChange={(e) => setCodeData(e.target.value)}
+              />
+              <div className="flex justify-end">
+                <Button
+                  onClick={handleAudit}
+                  className="deploy-button font-bold mt-3 px-6 py-2 bg-amber-500 text-white rounded "
+                >
+                  Submit
+                </Button>
+              </div>
             </div>
             <div className="bg-white p-4 rounded shadow-md">
-              <h2 className="text-xl font-semibold mb-4 w-full">Explanation</h2>
-
-              <p className="break-words w-full whitespace-pre-wrap ">
-                {explanation || "Loading explanation..."}
-              </p>
+              <h2 className="text-xl font-semibold mb-4 w-full">Audit</h2>
+              {loading ? (
+                <>
+                  {audit ? (
+                    <>
+                      <p className="break-words w-full whitespace-pre-wrap ">
+                        {audit}
+                      </p>
+                      <Button
+                        onClick={downloadAudit}
+                        className="deploy-button font-bold mt-3 px-6 py-2 bg-amber-500 text-white rounded "
+                      >
+                        Download PDF
+                      </Button>
+                    </>
+                  ) : (
+                    <div className="flex justify-center pt-10">
+                      Audit loading...
+                    </div>
+                  )}
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>
