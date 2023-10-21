@@ -41,3 +41,21 @@ export function generateSolidityConvertPrompt(sourceCode: string) {
     `;
     return prompt;
 }
+
+export function extractSolidityCodeAndExplanation(response: string): { solidityCode: string, explanation: string } {
+    // Find the indices of the Solidity code block
+    const codeBlockStart = response.indexOf("```solidity");
+    const codeBlockEnd = response.indexOf("```", codeBlockStart + "```solidity".length - 1);
+    
+    if (codeBlockStart === -1 || codeBlockEnd === -1) {
+        throw new Error('Solidity code block not found');
+    }
+
+    // Extract the Solidity code
+    const solidityCode = response.substring(codeBlockStart + "```solidity".length, codeBlockEnd).trim();
+
+    // Get everything after the Solidity code block
+    const explanation = response.substring(codeBlockEnd + "```".length).trim();
+    
+    return { solidityCode, explanation };
+}
