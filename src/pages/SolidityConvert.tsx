@@ -57,7 +57,7 @@ function SolidityConvert() {
       <div className="bg-teal-100 min-h-screen py-8">
         <div className="container mx-auto">
           <h1 className="text-4xl font-custom text-center mb-8 text-teal-500">
-            Clarity Smart Contract Address: {clarityAddress}
+            Solidity Smart Contract Address: {clarityAddress}
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 ml-5 mr-5">
             <div className="bg-white p-4 rounded shadow-md">
