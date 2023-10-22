@@ -129,7 +129,7 @@ function ClarityConvert() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 ml-5 mr-5">
             <div className="bg-white p-4 rounded shadow-md">
               <h2 className="text-xl font-semibold mb-4">
-                Solidty Smart Contract Code
+                Solidity Smart Contract Code
               </h2>
               <pre className="overflow-auto">
                 {codeData || "Loading code..."}
