@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Tabs, TextInput } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
 
-
 function Home() {
   const navigate = useNavigate();
   const [clarityField, setClarityField] = useState("");
@@ -109,13 +108,18 @@ function Home() {
           </div>
         </Tabs.Item>
       </Tabs.Group>
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-8"> {/* Updated this div */}
+      <div className="absolute bottom-12  flex items-center ">
+        {" "}
+        {/* Updated this div */}
         <img src="/easya.png" alt="Easy A Logo" className="h-20 w-auto" />
-        <img src="/x.png" alt="Easy A Logo" className="h-8 w-auto" />
-        <img src="/stacks2.png" alt="Stacks Logo" className="h-20 w-auto" />
-        <img src="/x.png" alt="Easy A Logo" className="h-8 w-auto mr" />
-        <img src="/hiro.png" alt="Stacks Logo" className="h-20 w-auto" />
-
+        <img src="/x.png" alt="Easy A Logo" className="h-8 w-auto ml-8" />
+        <img
+          src="/stacks2.png"
+          alt="Stacks Logo"
+          className="h-20 w-auto ml-6"
+        />
+        <img src="/x.png" alt="Easy A Logo" className="h-8 w-auto ml-2" />
+        <img src="/hiro.png" alt="Stacks Logo" className="h-20 w-auto ml-8" />
       </div>
     </div>
   );
