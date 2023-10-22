@@ -116,7 +116,7 @@ export async function getAuditReport(req, res) {
     }
 }
 
-export async function deployToEthereum(req, res) {
+export async function compileContract(req, res) {
 
   const contractCode = req.body.contractCode;
 
