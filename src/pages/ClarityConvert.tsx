@@ -46,7 +46,7 @@ function ClarityConvert() {
           const wallet = new ethers.Wallet(privateKey!, provider);
           
           const response = await axios.post(
-            "http://localhost:3001/deployToEthereum",
+            "http://localhost:3001/compileContract",
             {
               contractCode: solidityCode
             }
