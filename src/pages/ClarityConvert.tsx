@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "flowbite-react";
+import { Button, Toast } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Web3Provider } from "@ethersproject/providers";
@@ -19,11 +19,13 @@ function ClarityConvert() {
   const [codeData, setCodeData] = useState(null);
   const [solidityCode, setSolidityCode] = useState(null);
   const [explanation, setExplanation] = useState(null);
-  const [broadcastSuccess, setBroadcastSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [broadcastSuccess, setBroadcastSuccess] = useState<string | null>(null);
 
   // Handle Deploy function
   const handleDeploy = async () => {
     // Check if MetaMask is installed
+    setLoading(true);
     if (window.ethereum) {
       try {
         const provider = new Web3Provider(window.ethereum);
@@ -37,18 +39,19 @@ function ClarityConvert() {
         console.log("Connected to account:", account);
 
         if (solidityCode) {
-
           const privateKey = process.env.REACT_APP_PRIVATE_KEY;
-          const provider = new ethers.providers.InfuraProvider('sepolia', {
-              projectId: "935538f6574f4f99b4a6b83b182010bf",
-              projectSecret: "fc907599617b4e58957043073dd24cc4"});
-          
+          const provider = new ethers.InfuraProvider(
+            "sepolia",
+            "935538f6574f4f99b4a6b83b182010bf",
+            "fc907599617b4e58957043073dd24cc4"
+          );
+
           const wallet = new ethers.Wallet(privateKey!, provider);
-          
+
           const response = await axios.post(
             "http://localhost:3001/compileContract",
             {
-              contractCode: solidityCode
+              contractCode: solidityCode,
             }
           );
 
@@ -57,28 +60,32 @@ function ClarityConvert() {
             response.data.bytecode,
             wallet
           );
-      
-        
+
           // Deploy the contract
-          const deploymentTransaction = await contractFactory.getDeployTransaction();
-          const txResponse = await wallet.sendTransaction(deploymentTransaction);
-        
+          const deploymentTransaction =
+            await contractFactory.getDeployTransaction();
+          const txResponse = await wallet.sendTransaction(
+            deploymentTransaction
+          );
+
           // Wait for the transaction to be mined and get the receipt
           const receipt = await txResponse.wait();
-        
+
           // Check if 'receipt' is null or undefined
           if (!receipt) {
-            throw new Error('Transaction receipt is null. Deployment might have failed.');
+            throw new Error(
+              "Transaction receipt is null. Deployment might have failed."
+            );
           }
-        
-          // The contract address is available in the receipt
-          const contractAddress = receipt.contractAddress || '0x0';
 
+          // The contract address is available in the receipt
+          const contractAddress = receipt.contractAddress || "0x0";
+          setLoading(false);
+          setBroadcastSuccess(contractAddress);
           console.log("Contract Address: ", contractAddress);
         } else {
           alert("Please wait for the code to load!");
         }
-
       } catch (error) {
         console.error("User rejected access or there was an error:", error);
       }
@@ -90,7 +97,7 @@ function ClarityConvert() {
   useEffect(() => {
     const fetchData = async () => {
       console.log("Fetching data whoopyyyy...");
-      console.log(`address: ${clarityAddress}`)
+      console.log(`address: ${clarityAddress}`);
       try {
         // Make POST request to backend
         const response = await axios.post(
@@ -142,12 +149,26 @@ function ClarityConvert() {
           <div className="bg-white p-4 rounded shadow-md ">
             <div className="flex justify-between">
               <h2 className="text-2xl font-semibold mb-4 ">Explanation</h2>
-              <Button
-                onClick={handleDeploy}
-                className="deploy-button font-bold mt-2 px-3 py-1 bg-amber-500 text-white rounded "
-              >
-                DEPLOY
-              </Button>
+              {broadcastSuccess ? (
+                <Toast className="h-16">
+                  <div className="ml-3 text-sm font-semibold break-all">
+                    Broadcast Transaction ID: {broadcastSuccess}
+                  </div>
+                  <Toast.Toggle />
+                </Toast>
+              ) : (
+                <></>
+              )}
+              {solidityCode ? (
+                <Button
+                  onClick={handleDeploy}
+                  className="deploy-button font-bold mt-2 px-6  bg-amber-500 text-white rounded h-[64px]"
+                >
+                  {loading ? "Loading" : "Deploy Solidity Contract"}
+                </Button>
+              ) : (
+                <></>
+              )}
             </div>
             <p className="break-words whitespace-pre-wrap ">
               {explanation || "Loading explanation..."}
