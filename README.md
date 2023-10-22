@@ -1,46 +1,23 @@
-# Getting Started with Create React App
+# About Clarify
+Clarify is an innovative toolbox harnessing the power of OpenAI to streamline blockchain development. It offers a suite of functionalities tailored for developers working with Solidity and Clarity (Stacks). At its core, Clarify allows seamless conversion between Solidity and Clarity code, enabling effortless deployment on their respective platforms. Beyond simple conversion, our tool provides an AI-driven audit feature for Clarity code, ensuring robustness and security in smart contract deployments. Furthermore, Clarify demystifies the complexities of Clarity code with its AI-powered explanation module, making the codebase more accessible to both seasoned and novice developers. In essence, Clarify is a one-stop-shop for enhancing blockchain development efficiency, security, and understanding
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+# Getting Started with Clarify
+## Setting up Clarify
+1. Clone repo
+2. Run `npm install` in main folder
+3. Set up .env.local file in main folder with OPENAI key `REACT_APP_OPENAI_API_KEY=XXXXXXXXXXXXXXXX`
+4. `cd` into backend and run `npm install`
+6. Set up .env file in backend folder with OPENAI key `REACT_APP_OPENAI_API_KEY=XXXXXXXXXXXXXXXX`
+7. Run `npm start` in backend folder
+8. `cd..` into main folder
+9. Run `npm start` in main folder
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Running Clarify
+1. `cd` into backend 
+2. Run `npm start` in backend folder
+3. `cd..` into main folder
+4. Run `npm start` in main folder
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
