@@ -83,7 +83,7 @@ function SolidityConvert() {
             <div className="flex justify-between">
               <h2 className="text-2xl font-semibold mb-4 ">Explanation</h2>
               {broadcastSuccess ? (
-                <Toast className="h-20">
+                <Toast className="h-16">
                   <div className="ml-3 text-sm font-semibold break-all">
                     Broadcast Transaction ID: {broadcastSuccess}
                   </div>
@@ -95,9 +95,9 @@ function SolidityConvert() {
               {clarityCode ? (
                 <Button
                   onClick={handleDeploy}
-                  className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
+                  className="deploy-button font-bold mt-2 px-6  bg-amber-500 text-white rounded h-[64px]"
                 >
-                  DEPLOY
+                  Deploy Clarity Contract
                 </Button>
               ) : (
                 <></>
