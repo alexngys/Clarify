@@ -69,10 +69,10 @@ function ClarityConvert() {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-teal-300 to-teal-500 min-h-screen py-8">
+      <div className="bg-teal-100 min-h-screen py-8">
         <div className="container mx-auto">
-          <h1 className="text-4xl font-custom text-center mb-8 text-white">
-            Solidty Smart Contract Address: {clarityAddress}
+          <h1 className="text-4xl font-custom text-center mb-8 text-teal-500">
+            Solidity Smart Contract Address: {clarityAddress}
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 ml-5 mr-5">
             <div className="bg-white p-4 rounded shadow-md">
@@ -99,7 +99,7 @@ function ClarityConvert() {
               <h2 className="text-2xl font-semibold mb-4 ">Explanation</h2>
               <Button
                 onClick={handleDeploy}
-                className="deploy-button font-bold mt-2 px-6 py-2 bg-amber-500 text-white rounded "
+                className="deploy-button font-bold mt-2 px-3 py-1 bg-amber-500 text-white rounded "
               >
                 DEPLOY
               </Button>
