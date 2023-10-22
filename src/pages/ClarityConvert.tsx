@@ -152,7 +152,7 @@ function ClarityConvert() {
               {broadcastSuccess ? (
                 <Toast className="h-16">
                   <div className="ml-3 text-sm font-semibold break-all">
-                    Broadcast Transaction ID: {broadcastSuccess}
+                    Contract Address: {broadcastSuccess}
                   </div>
                   <Toast.Toggle />
                 </Toast>
