@@ -7,8 +7,8 @@ import { generateClarifyPrompt,
     extractClarityCodeAndExplanation,
     generateAuditPrompt
  } from '../utils/promptUtil';
-import { deployToStacks } from '../utils/deployToStacks';
 import { getSoliditySourceCode } from '../utils/etherscanAPIUtil';
+const solc = require('solc');
 
 export async function getContractAnalysis(req, res) {
     const contractId = req.body.contractId;
@@ -42,7 +42,20 @@ export async function convertToSolidity(req, res) {
     }
 
     try {
-        const sourceCodeData = await getClaritySourceCode(contractAddress, contractName);
+        // const sourceCodeData = await getClaritySourceCode(contractAddress, contractName);
+
+        const sourceCodeData = {"source": `;; Multiplayer Counter contract
+
+        (define-map counters principal uint)
+        
+        (define-read-only (get-count (who principal))
+          (default-to u0 (map-get? counters who))
+        )
+        
+        (define-public (count-up)
+          (ok (map-set counters tx-sender (+ (get-count tx-sender) u1)))
+        )`};
+
         const prompt = generateSolidityConvertPrompt(sourceCodeData.source);
         const gptResponse = await getGPTResponse(prompt);
 
@@ -87,8 +100,6 @@ export async function convertToClarity(req, res) {
 export async function getAuditReport(req, res) {
     const contractCode = req.body.contractCode;
   
-    console.log("Endpoint hit");
-  
     if (!contractCode) {
       res.status(400).send("Invalid");
       return;
@@ -103,4 +114,44 @@ export async function getAuditReport(req, res) {
       console.error("Error fetching smart contract source code:", error);
       res.status(500).send("Internal server error");
     }
-  }
+}
+
+export async function compileContract(req, res) {
+
+  const contractCode = req.body.contractCode;
+
+  try {
+    const input = {
+        language: 'Solidity',
+        sources: {
+            'ClarityEquivalent.sol': {
+                content: contractCode
+            }
+        },
+        settings: {
+            outputSelection: {
+                '*': {
+                    '*': ['*']
+                }
+            }
+        }
+    };
+
+    const output = JSON.parse(solc.compile(JSON.stringify(input)));
+
+    if (output.errors) {
+        console.error('Compilation errors:', output.errors);
+        return null;
+    }
+
+    const contract = output.contracts['ClarityEquivalent.sol']['ClarityEquivalent'];
+
+    const abi = contract.abi;
+    const bytecode = contract.evm.bytecode.object;
+
+    res.send({ abi, bytecode });
+  } catch (error) {
+    console.error('Error compiling smart contract code:', error);
+    res.status(500).send('Internal server error');
+}
+}

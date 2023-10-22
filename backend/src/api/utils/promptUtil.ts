@@ -25,7 +25,8 @@ export function generateSolidityConvertPrompt(sourceCode: string) {
 
         Description: 
         Convert the provided Clarity smart contract code to its equivalent in Solidity, ensuring that the functionality remains consistent across both versions. Translate the logic, functions, and data structures from Clarity to Solidity while preserving the original intent and behavior of the contract.
-        
+        Call the solidity contract "ClarityEquivalent", and use the solidity compiler version 0.8.21
+
         Clarity Code:
         \`\`\`
         ${sourceCode}
