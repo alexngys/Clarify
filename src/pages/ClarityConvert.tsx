@@ -3,6 +3,8 @@ import { Button } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Web3Provider } from "@ethersproject/providers";
+import { deployToEthereum } from "../utils/deployToEthereum";
+import { ethers } from "ethers";
 
 // TypeScript type assertion
 declare global {
@@ -13,6 +15,7 @@ declare global {
 
 function ClarityConvert() {
   let { clarityAddress } = useParams();
+
   const [codeData, setCodeData] = useState(null);
   const [solidityCode, setSolidityCode] = useState(null);
   const [explanation, setExplanation] = useState(null);
@@ -33,8 +36,49 @@ function ClarityConvert() {
         const account = accounts[0];
         console.log("Connected to account:", account);
 
-        // Here you would add the logic to deploy the contract using ethers.js
-        // ...
+        if (solidityCode) {
+
+          const privateKey = process.env.REACT_APP_PRIVATE_KEY;
+          const provider = new ethers.providers.InfuraProvider('sepolia', {
+              projectId: "935538f6574f4f99b4a6b83b182010bf",
+              projectSecret: "fc907599617b4e58957043073dd24cc4"});
+          
+          const wallet = new ethers.Wallet(privateKey!, provider);
+          
+          const response = await axios.post(
+            "http://localhost:3001/deployToEthereum",
+            {
+              contractCode: solidityCode
+            }
+          );
+
+          const contractFactory = new ethers.ContractFactory(
+            response.data.abi,
+            response.data.bytecode,
+            wallet
+          );
+      
+        
+          // Deploy the contract
+          const deploymentTransaction = await contractFactory.getDeployTransaction();
+          const txResponse = await wallet.sendTransaction(deploymentTransaction);
+        
+          // Wait for the transaction to be mined and get the receipt
+          const receipt = await txResponse.wait();
+        
+          // Check if 'receipt' is null or undefined
+          if (!receipt) {
+            throw new Error('Transaction receipt is null. Deployment might have failed.');
+          }
+        
+          // The contract address is available in the receipt
+          const contractAddress = receipt.contractAddress || '0x0';
+
+          console.log("Contract Address: ", contractAddress);
+        } else {
+          alert("Please wait for the code to load!");
+        }
+
       } catch (error) {
         console.error("User rejected access or there was an error:", error);
       }
@@ -45,7 +89,8 @@ function ClarityConvert() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Fetching data...");
+      console.log("Fetching data whoopyyyy...");
+      console.log(`address: ${clarityAddress}`)
       try {
         // Make POST request to backend
         const response = await axios.post(

@@ -22,8 +22,6 @@ const clarityCode = `(define-public (write-message (message (string-utf8 500)))
 export async function deployToStacks(clarityCode: string) {
     const contractName = 'hello-stacks';
 
-    console.log("Generating tx")
-
     const deployTx = await makeContractDeploy({
         contractName,
         codeBody: clarityCode,
@@ -32,11 +30,7 @@ export async function deployToStacks(clarityCode: string) {
         anchorMode: AnchorMode.Any
     });
 
-    console.log("Broadcasting tx")
-
     const result = await broadcastTransaction(deployTx, network);
-
-    console.log("Tx broadcasted")
 
     if ((result as TxBroadcastResultOk).txid) {
         console.log('Transaction ID:', (result as TxBroadcastResultOk).txid);
